@@ -1,0 +1,737 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Documentación ARTEVIVAX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf5ee; --surface:#fffdf9; --surface2:#f3ebe0; --fg:#2b2030; --muted:#6c5f70; --line:#e0d4c4;
+  --plum:#5b2a6e; --plum-soft:#eadcf1; --gold:#9a6a0c; --gold-soft:#f8e7bd;
+  --ok:#1f7a4d; --ok-soft:#d8f0e3; --warn:#9a5b00; --warn-soft:#fbe6c2; --bad:#a3302f; --bad-soft:#f8d9d6;
+  --code-bg:#241a2a; --code-fg:#f2e9f5;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171119; --surface:#211826; --surface2:#2a1f30; --fg:#f1e9f3; --muted:#b2a4b8; --line:#3b2e43;
+  --plum:#d4a3ea; --plum-soft:#3a2547; --gold:#e8bb55; --gold-soft:#41331a;
+  --ok:#6ad79f; --ok-soft:#173a2a; --warn:#f0b35a; --warn-soft:#412c10; --bad:#f08c88; --bad-soft:#431e1e;
+  --code-bg:#0f0a12; --code-fg:#f2e9f5; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#171119; --surface:#211826; --surface2:#2a1f30; --fg:#f1e9f3; --muted:#b2a4b8; --line:#3b2e43;
+  --plum:#d4a3ea; --plum-soft:#3a2547; --gold:#e8bb55; --gold-soft:#41331a;
+  --ok:#6ad79f; --ok-soft:#173a2a; --warn:#f0b35a; --warn-soft:#412c10; --bad:#f08c88; --bad-soft:#431e1e;
+  --code-bg:#0f0a12; --code-fg:#f2e9f5; color-scheme:dark;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 Nunito,system-ui,sans-serif;padding-inline:16px;padding-block:0 64px}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3rem)} h2{font-size:1.75rem;color:var(--plum)} h3{font-size:1.15rem;margin-top:1.6rem}
+p{margin:.6rem 0;max-width:68ch} a{color:var(--plum)}
+code{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.86em;background:var(--surface2);padding:.1em .35em;border-radius:5px}
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:210px minmax(0,1fr);gap:40px}
+nav.side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-block:28px;display:flex;flex-direction:column;gap:2px}
+nav.side .brand{font-family:Fredoka,sans-serif;font-size:1.25rem;color:var(--plum);margin-bottom:12px}
+nav.side .brand span{color:var(--gold)}
+nav.side a{text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:8px;font-weight:600;font-size:.95rem}
+nav.side a:hover{background:var(--surface2)} nav.side a.on{background:var(--plum-soft);color:var(--plum)}
+main{min-width:0}
+section{padding-block:44px 8px;border-top:1px solid var(--line)} section:first-of-type{border-top:0}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.hero{padding-block:36px 12px} .hero p{font-size:1.1rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:99px;letter-spacing:.03em;white-space:nowrap}
+.t-ok{background:var(--ok-soft);color:var(--ok)} .t-part{background:var(--warn-soft);color:var(--warn)} .t-pend{background:var(--bad-soft);color:var(--bad)} .t-conf{background:var(--gold-soft);color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-block:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.card h3{margin:0 0 6px;font-size:1.05rem}
+.card p{margin:.3rem 0;font-size:.93rem;color:var(--muted)}
+.tw{overflow-x:auto;margin-block:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem} th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);background:var(--surface2)} tr:last-child td{border-bottom:0}
+.note{border-left:4px solid var(--gold);background:var(--gold-soft);padding:12px 16px;border-radius:0 12px 12px 0;margin-block:16px;max-width:76ch;font-size:.95rem}
+.note.bad{border-color:var(--bad);background:var(--bad-soft)}
+ol.steps{padding-left:0;list-style:none;counter-reset:s;max-width:70ch} ol.steps li{counter-increment:s;position:relative;padding:4px 0 4px 40px;margin:6px 0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:3px;width:28px;height:28px;border-radius:50%;background:var(--plum);color:var(--bg);font:600 .9rem Fredoka;display:grid;place-items:center}
+figure{margin:18px 0} figcaption{font-size:.88rem;color:var(--muted);margin-top:8px;max-width:72ch}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;overflow-x:auto}
+.fig svg{display:block;min-width:720px;width:100%;height:auto}
+svg text{font:600 12px Nunito,sans-serif;fill:currentColor}
+svg .sm{font-size:10.5px;font-weight:400;fill:var(--muted)}
+svg .n{fill:var(--surface2);stroke:var(--line);stroke-width:1.3}
+svg .acc{fill:var(--plum-soft);stroke:var(--plum);stroke-width:1.5}
+svg .gold{fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.5}
+svg .db{fill:var(--surface);stroke:var(--muted);stroke-width:1.2}
+svg .ln{stroke:var(--muted);stroke-width:1.4;fill:none}
+svg .dash{stroke:var(--gold);stroke-width:1.8;fill:none;stroke-dasharray:6 4}
+.pre-mermaid,pre.mermaid{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;overflow-x:auto;text-align:center;margin-block:16px}
+.code{position:relative;margin-block:12px}
+.code pre{margin:0;background:var(--code-bg);color:var(--code-fg);border-radius:12px;padding:14px 16px;overflow-x:auto;font:400 .84rem/1.6 'JetBrains Mono',monospace}
+.code button{position:absolute;top:8px;right:8px;background:#ffffff1c;color:var(--code-fg);border:1px solid #ffffff30;border-radius:8px;padding:3px 10px;font:600 .75rem Nunito;cursor:pointer}
+.code button:hover{background:#ffffff33}
+.cap{font-size:.82rem;font-weight:700;color:var(--muted);margin:16px 0 -4px}
+/* mockups */
+.mocks{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;margin-block:18px}
+.win{width:440px;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 8px 24px #2b203014}
+.win .bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:var(--surface2);border-bottom:1px solid var(--line);font-size:.72rem;color:var(--muted)}
+.win .bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block} .win .bar span{margin-left:8px;font-family:'JetBrains Mono',monospace}
+.win .menu{display:flex;gap:12px;flex-wrap:wrap;padding:9px 14px;border-bottom:1px solid var(--line);font-size:.8rem;font-weight:700}
+.win .menu b{color:var(--plum);font-family:Fredoka;margin-right:auto;font-weight:600}
+.win .menu em{font-style:normal;color:var(--muted)} .win .menu .x{opacity:.55;text-decoration:line-through dotted}
+.win .body{padding:16px 16px 18px;font-size:.85rem}
+.win h4{font:600 1.05rem Fredoka;margin:0 0 10px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.tile{border:1.5px dashed var(--plum);border-radius:10px;padding:10px 6px;text-align:center;font-weight:700;color:var(--plum);font-size:.78rem;background:var(--plum-soft)}
+.cnt{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;color:var(--muted);font-size:.72rem} .cnt b{display:block;font:600 1.3rem Fredoka;color:var(--fg)}
+.fld{margin-bottom:9px} .fld label{display:block;font-size:.7rem;font-weight:700;color:var(--muted);margin-bottom:3px}
+.fld div{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:var(--bg)}
+.btn{display:inline-block;background:var(--plum);color:var(--bg);font-weight:700;border-radius:9px;padding:7px 16px;font-size:.82rem}
+.prog{height:9px;background:var(--surface2);border-radius:9px;overflow:hidden;margin-top:10px} .prog i{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--plum),var(--gold))}
+.pcard{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.pcard small{display:block;color:var(--muted);font-size:.72rem}
+.callout{position:absolute;background:var(--gold);color:#241a10;font:700 .68rem Nunito;padding:2px 8px;border-radius:99px}
+.phones{display:flex;flex-wrap:wrap;gap:22px;margin-block:18px}
+.phone{width:200px;max-width:100%;height:390px;border:6px solid var(--fg);border-radius:30px;background:var(--surface);overflow:hidden;position:relative;display:flex;flex-direction:column;font-size:.75rem}
+.phone .notch{width:60px;height:5px;background:var(--fg);border-radius:9px;margin:7px auto 0;flex:none}
+.phone .scr{flex:1;padding:12px 12px 10px;display:flex;flex-direction:column;gap:8px;min-height:0}
+.phone h5{font:600 .95rem Fredoka;margin:0;text-align:center;color:var(--plum)}
+.phone .sub{text-align:center;color:var(--muted);font-size:.7rem}
+.phone .tabs{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:7px 0 9px;font-size:.66rem;font-weight:700;color:var(--muted);flex:none}
+.phone .tabs .on{color:var(--plum)}
+.world{border-radius:11px;padding:9px 11px;font-weight:700;display:flex;justify-content:space-between;background:var(--plum-soft);color:var(--plum)}
+.world.lock{background:var(--surface2);color:var(--muted);font-weight:600}
+.cam{flex:1;border-radius:12px;background:linear-gradient(160deg,#3a2547,#7b4a8d);position:relative;display:grid;place-items:center;color:#fff}
+.cam .score{position:absolute;top:8px;left:8px;background:#000a;border-radius:9px;padding:3px 9px;font:600 .95rem Fredoka}
+.cam .face{position:absolute;top:8px;right:8px;font-size:1.3rem}
+.cam .tip{position:absolute;left:8px;right:8px;bottom:8px;background:#000a;border-radius:9px;padding:5px 8px;font-size:.68rem}
+.stick{width:44px;height:96px} .stick *{stroke:#fff;stroke-width:3;stroke-linecap:round;fill:none}
+.kp{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center} .kp b{display:block;font:600 1.15rem Fredoka;color:var(--plum)} .kp span{font-size:.64rem;color:var(--muted)}
+.kpg{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.sdark{width:520px;max-width:100%;border-radius:12px;overflow:hidden;border:1px solid #3b2e43;background:#120d14;color:#f3ecf5;box-shadow:0 8px 24px #2b203022}
+.sdark .nav{display:flex;gap:12px;align-items:center;padding:10px 14px;font-size:.74rem;border-bottom:1px solid #2a1f30} .sdark .nav b{font:600 1rem Fredoka;color:#e8bb55;margin-right:auto;letter-spacing:.05em}
+.sdark .nav .g{background:#e8bb55;color:#241a10;font-weight:700;padding:3px 10px;border-radius:7px}
+.sdark .hero2{padding:26px 18px;background:linear-gradient(120deg,#3a2547,#120d14 70%)} .sdark .hero2 small{color:#e8bb55;font-weight:700;letter-spacing:.1em;font-size:.65rem} .sdark .hero2 h4{font:600 1.7rem Fredoka;margin:4px 0 10px}
+.sdark .hero2 .b{display:inline-block;padding:4px 12px;border-radius:7px;background:#ffffff22;font-size:.72rem;font-weight:700;margin-right:5px} .sdark .hero2 .b.p{background:#e8bb55;color:#241a10}
+.sdark .row{padding:12px 18px 14px} .sdark .row p{margin:0 0 6px;font-weight:700;font-size:.78rem}
+.sdark .cards{display:flex;gap:8px;overflow:hidden} .sdark .cards i{flex:0 0 92px;height:56px;border-radius:7px;background:#2a1f30;display:grid;place-items:center;font-style:normal;font-size:1.1rem;position:relative}
+.sdark .cards i::after{content:"🔒";position:absolute;right:4px;bottom:2px;font-size:.6rem}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:16px;background:#120d14}
+.plan{border:1px solid #3b2e43;border-radius:11px;padding:12px 8px;text-align:center;font-size:.7rem;color:#f3ecf5} .plan h6{margin:0;font:600 .95rem Fredoka} .plan .pr{font:600 1.15rem Fredoka;color:#e8bb55;margin:5px 0} .plan.hot{border-color:#e8bb55;background:#2a2012}
+.chk{display:flex;flex-direction:column;gap:2px;margin:10px 0}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:7px 10px;border-radius:9px;cursor:pointer;max-width:80ch} .chk label:hover{background:var(--surface2)}
+.chk input{margin-top:5px;accent-color:var(--plum);width:17px;height:17px;flex:none}
+.chk input:checked+span{color:var(--muted);text-decoration:line-through}
+.chk h3{margin:18px 0 4px}
+.meter{display:flex;align-items:center;gap:12px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:2}
+.meter .bar{flex:1;height:10px;background:var(--surface2);border-radius:9px;overflow:hidden;max-width:360px} .meter .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+.meter button,.reset{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:3px 10px;font:600 .78rem Nunito;cursor:pointer}
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media (max-width:860px){
+  .shell{display:block}
+  nav.side{flex-direction:row;overflow-x:auto;padding-block:8px;gap:4px;background:var(--bg);z-index:5;border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px;white-space:nowrap}
+  nav.side .brand{display:none}
+  html{scroll-padding-top:60px}
+  h2{font-size:1.5rem}
+}
+</style>
+
+<div class="shell">
+<nav class="side" id="nav" aria-label="Secciones">
+  <div class="brand">ARTEVIVA<span>X</span></div>
+  <a href="#inicio">Inicio</a>
+  <a href="#arquitectura">Arquitectura</a>
+  <a href="#admin">Administrador</a>
+  <a href="#familia">Familia y docente</a>
+  <a href="#estudiante">Estudiante (app)</a>
+  <a href="#streaming">Streaming</a>
+  <a href="#operacion">Operación</a>
+  <a href="#entrega">Entrega</a>
+</nav>
+
+<main>
+<section id="inicio" class="hero">
+  <div class="eyebrow">Documentación de entrega</div>
+  <h1>ARTEVIVA y ARTEVIVAX: manuales y guía técnica</h1>
+  <p>Dos productos en un mismo servidor: la plataforma de aprendizaje de danza con IA (<code>/app</code> y app móvil) y el streaming de clases por suscripción (<code>/streaming</code>). Esta guía describe lo que existe hoy y marca sin rodeos lo que falta.</p>
+
+  <h3>Estado a la fecha de entrega</h3>
+  <div class="tw"><table>
+    <tr><th>Pieza</th><th>Estado</th><th>Detalle</th></tr>
+    <tr><td>Web: registro, login, cierre de sesión</td><td><span class="tag t-ok">Listo</span></td><td>Las cuentas nuevas quedan pendientes hasta que el equipo técnico las active.</td></tr>
+    <tr><td>Panel de administración: cursos, lecciones, subir media, publicar</td><td><span class="tag t-ok">Listo</span></td><td>Subida directa a S3 con CORS verificado.</td></tr>
+    <tr><td>Panel de administración: Usuarios y contadores</td><td><span class="tag t-pend">Pendiente</span></td><td>El enlace Usuarios lleva a una página inexistente; los contadores muestran “—”.</td></tr>
+    <tr><td>Panel de familia: Hijos, Consentimientos, Progreso</td><td><span class="tag t-pend">Pendiente</span></td><td>La lógica existe en el servidor; faltan las pantallas.</td></tr>
+    <tr><td>App móvil: login, mundos, práctica con cámara, progreso</td><td><span class="tag t-part">Parcial</span></td><td>APK Android generable. La práctica usa una sesión y lección de demostración. Mundos Jazz, Latino y Contemporáneo bloqueados.</td></tr>
+    <tr><td>App para iPhone</td><td><span class="tag t-pend">Pendiente</span></td><td>Requiere cuenta Apple Developer de pago.</td></tr>
+    <tr><td>Streaming: portada, catálogo, planes</td><td><span class="tag t-ok">Listo</span></td><td>Catálogo con contenido de ejemplo (sin miniaturas reales).</td></tr>
+    <tr><td>Streaming: login, pago, reproducción, administración</td><td><span class="tag t-conf">Confirmar</span></td><td>Pantallas con cuenta; deben documentarse con quien administra esa aplicación.</td></tr>
+    <tr><td>Despliegue automático (push a <code>trunk</code>)</td><td><span class="tag t-ok">Listo</span></td><td>Runner autoalojado en la misma EC2.</td></tr>
+    <tr><td>Correo, voz y notificaciones push</td><td><span class="tag t-pend">Pendiente</span></td><td>Llaves marcadas <code>DESACTIVADO</code> (SendGrid, ElevenLabs, Firebase).</td></tr>
+    <tr><td>Copias de seguridad de las bases de datos</td><td><span class="tag t-pend">Pendiente</span></td><td>No hay respaldo automático.</td></tr>
+  </table></div>
+
+  <h3>Quién usa qué</h3>
+  <div class="grid">
+    <div class="card"><h3>Administrador</h3><p>Carga cursos, lecciones, videos y esqueletos. Entra por la web.</p><a href="#admin">Ver manual</a></div>
+    <div class="card"><h3>Padre, madre o docente</h3><p>Se registra, inicia sesión y (cuando estén las pantallas) gestiona hijos y consentimientos.</p><a href="#familia">Ver manual</a></div>
+    <div class="card"><h3>Estudiante</h3><p>Practica con la cámara del celular en la app móvil.</p><a href="#estudiante">Ver manual</a></div>
+    <div class="card"><h3>Suscriptor del streaming</h3><p>Ve clases por suscripción en <code>/streaming</code>.</p><a href="#streaming">Ver manual</a></div>
+    <div class="card"><h3>Equipo técnico</h3><p>Opera el servidor, despliega y atiende incidentes.</p><a href="#operacion">Ver guía</a></div>
+  </div>
+
+  <div class="tw"><table>
+    <tr><th>Rol</th><th>Dónde entra</th><th>Cómo se obtiene</th></tr>
+    <tr><td><code>ADMIN</code></td><td>Web, Panel de Administración</td><td>Se asigna por SQL (manual 5).</td></tr>
+    <tr><td><code>TEACHER</code></td><td>Web, panel con permisos reducidos</td><td>Se registra y el equipo técnico lo activa.</td></tr>
+    <tr><td><code>PARENT</code></td><td>Web, Panel de Familia</td><td>Se registra y el equipo técnico lo activa.</td></tr>
+    <tr><td><code>STUDENT</code></td><td>App móvil</td><td>Lo crea el equipo técnico por SQL; no se registra solo.</td></tr>
+  </table></div>
+</section>
+
+<section id="arquitectura">
+  <div class="eyebrow">Equipo técnico</div>
+  <h2>Cómo está armado</h2>
+  <p>Una sola instancia EC2 atiende los dos productos. El nginx del servidor reparte por ruta; dentro de <code>/app</code> un segundo nginx (el gateway) enruta a los servicios.</p>
+  <figure>
+    <div class="fig">
+    <svg viewBox="0 0 880 430" role="img" aria-label="Arquitectura: clientes llegan al nginx del servidor, que envía /streaming a la app de streaming y /app al gateway, que reparte a los microservicios y estos a sus bases de datos; el navegador sube archivos directo a S3 con URL firmada.">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+      <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--gold)"/></marker></defs>
+      <text x="10" y="18" class="sm">CLIENTES</text>
+      <rect class="n" x="10" y="100" width="120" height="44" rx="9"/><text x="70" y="127" text-anchor="middle">App móvil</text>
+      <rect class="n" x="10" y="160" width="120" height="44" rx="9"/><text x="70" y="187" text-anchor="middle">Navegador</text>
+      <path class="ln" d="M130 122L168 143" marker-end="url(#ar)"/><path class="ln" d="M130 182L168 167" marker-end="url(#ar)"/>
+      <text x="134" y="126" class="sm" transform="translate(0 -12)">HTTPS</text>
+      <rect class="acc" x="170" y="120" width="130" height="70" rx="10"/><text x="235" y="150" text-anchor="middle">nginx del host</text><text x="235" y="167" text-anchor="middle" class="sm">artevivax.com :443</text>
+      <path class="ln" d="M235 190L235 298" marker-end="url(#ar)"/><text x="243" y="250" class="sm">/streaming/</text>
+      <rect class="gold" x="170" y="300" width="130" height="70" rx="10"/><text x="235" y="330" text-anchor="middle">Streaming</text><text x="235" y="347" text-anchor="middle" class="sm">Next.js :4000</text>
+      <path class="ln" d="M300 155L348 155" marker-end="url(#ar)"/><text x="304" y="147" class="sm">/app/</text>
+      <rect class="acc" x="350" y="120" width="120" height="70" rx="10"/><text x="410" y="148" text-anchor="middle">Gateway</text><text x="410" y="164" text-anchor="middle" class="sm">arteviva-nginx</text><text x="410" y="178" text-anchor="middle" class="sm">:8080</text>
+      <rect class="n" x="350" y="30" width="120" height="44" rx="9"/><text x="410" y="50" text-anchor="middle">Web Next.js</text><text x="410" y="64" text-anchor="middle" class="sm">basePath /app :3000</text>
+      <path class="ln" d="M410 120L410 76" marker-end="url(#ar)"/>
+      <path class="ln" d="M470 155L500 155M500 45L500 349"/>
+      <g>
+        <path class="ln" d="M500 45L518 45M500 83L518 83M500 121L518 121M500 159L518 159M500 197L518 197M500 235L518 235M500 273L518 273M500 311L518 311M500 349L518 349" marker-end="url(#ar)"/>
+        <rect class="n" x="520" y="30" width="150" height="30" rx="7"/><text x="595" y="49" text-anchor="middle">identity :3001</text>
+        <rect class="n" x="520" y="68" width="150" height="30" rx="7"/><text x="595" y="87" text-anchor="middle">content :3002</text>
+        <rect class="n" x="520" y="106" width="150" height="30" rx="7"/><text x="595" y="125" text-anchor="middle">admin :3009</text>
+        <rect class="n" x="520" y="144" width="150" height="30" rx="7"/><text x="595" y="163" text-anchor="middle">consent :3004</text>
+        <rect class="n" x="520" y="182" width="150" height="30" rx="7"/><text x="595" y="201" text-anchor="middle">progress :3006</text>
+        <rect class="n" x="520" y="220" width="150" height="30" rx="7"/><text x="595" y="239" text-anchor="middle">reporting :3007</text>
+        <rect class="n" x="520" y="258" width="150" height="30" rx="7"/><text x="595" y="277" text-anchor="middle">learning-path :3008</text>
+        <rect class="n" x="520" y="296" width="150" height="30" rx="7"/><text x="595" y="315" text-anchor="middle">feedback :3005</text>
+        <rect class="acc" x="520" y="334" width="150" height="30" rx="7"/><text x="595" y="353" text-anchor="middle">ai-orchestrator :3010</text>
+      </g>
+      <text x="520" y="20" class="sm">MICROSERVICIOS NESTJS</text><text x="730" y="14" class="sm">DATOS</text>
+      <path class="ln" d="M670 45L728 42" marker-end="url(#ar)"/>
+      <path class="ln" d="M670 83L728 90" marker-end="url(#ar)"/><path class="ln" d="M670 121L728 104" marker-end="url(#ar)"/>
+      <path class="ln" d="M670 159L728 168" marker-end="url(#ar)"/><path class="ln" d="M670 197L728 180" marker-end="url(#ar)"/>
+      <path class="ln" d="M670 235L728 235" marker-end="url(#ar)"/>
+      <path class="ln" d="M670 349L728 330" marker-end="url(#ar)"/>
+      <rect class="db" x="730" y="22" width="130" height="40" rx="8"/><text x="795" y="46" text-anchor="middle">identity_db</text>
+      <rect class="db" x="730" y="76" width="130" height="40" rx="8"/><text x="795" y="100" text-anchor="middle">content_db</text>
+      <rect class="db" x="730" y="152" width="130" height="40" rx="8"/><text x="795" y="176" text-anchor="middle">sessions_db</text>
+      <rect class="db" x="730" y="215" width="130" height="40" rx="8"/><text x="795" y="239" text-anchor="middle">reporting_db</text>
+      <rect class="gold" x="730" y="290" width="130" height="80" rx="8"/><text x="795" y="318" text-anchor="middle">IA en Python</text><text x="795" y="334" text-anchor="middle" class="sm">pose · corrección</text><text x="795" y="348" text-anchor="middle" class="sm">emoción · voz</text>
+      <path class="dash" d="M70 204L70 378" marker-end="url(#arg)"/>
+      <text x="80" y="290" style="fill:var(--gold)">PUT con</text><text x="80" y="304" style="fill:var(--gold)">URL firmada</text>
+      <rect class="gold" x="10" y="380" width="150" height="34" rx="8"/><text x="85" y="402" text-anchor="middle">S3 artevivax-media</text>
+    </svg>
+    </div>
+    <figcaption>El flujo punteado es la subida de archivos: el navegador envía el video directo a S3 con una URL que firma el servicio <code>admin</code>; por eso el bucket necesita CORS. Redis, Kafka, notification-service y motion-analysis no se dibujan para no saturar el esquema.</figcaption>
+  </figure>
+
+  <h3>Despliegue</h3>
+  <pre class="mermaid">flowchart TB
+  A[git push a trunk] --> B[Runner en la EC2]
+  B --> C[Restaura secretos de ~/secrets]
+  C --> D[Detecta servicios cambiados]
+  D --> E[Construye solo lo cambiado]
+  E --> F[podman-compose up -d]
+  F --> G[Reinicia gateway]
+  G --> H[Verifica salud]</pre>
+  <div class="note">El job define <code>RUNNER_TRACKING_ID: ""</code>. Sin eso, el runner mata al terminar el DNS interno de Podman y el puerto 8080, y la plataforma queda caída tras cada despliegue. No se debe quitar.</div>
+</section>
+
+<section id="admin">
+  <div class="eyebrow">Manual 1 · Web</div>
+  <h2>Administrador: cargar el catálogo</h2>
+  <p>Un <strong>curso</strong> es un “mundo” de danza. Cada curso tiene <strong>lecciones</strong> y cada lección lleva un video MP4, un esqueleto JSON (poses de referencia para la IA) y una miniatura JPEG. Solo lo <strong>Publicado</strong> lo ven los estudiantes.</p>
+  <pre class="mermaid">flowchart LR
+  A[Crear curso] --> B[Crear lecciones]
+  B --> C[Subir video, esqueleto y miniatura]
+  C --> D[Revisar lecciones]
+  D --> E[Publicar el curso]</pre>
+
+  <h3>Entrar y reconocer el panel</h3>
+  <ol class="steps">
+    <li>Abre <code>https://www.artevivax.com/app/login</code>, escribe correo y contraseña y pulsa <strong>Ingresar</strong>.</li>
+    <li>Con rol <code>ADMIN</code> o <code>TEACHER</code> llegas al Panel de Administración. La sesión se renueva sola; si te lleva al login, entra de nuevo.</li>
+  </ol>
+  <div class="mocks">
+    <div class="win" role="img" aria-label="Maqueta del Panel de Administración con tres accesos rápidos y tres contadores en blanco">
+      <div class="bar"><i></i><i></i><i></i><span>artevivax.com/app/dashboard/admin</span></div>
+      <div class="menu"><b>ARTEVIVA</b><em>Panel</em><em>Cursos</em><em>Lecciones</em><em class="x">Usuarios</em><em>Salir</em></div>
+      <div class="body">
+        <h4>Panel de Administración</h4>
+        <div class="tiles"><div class="tile">+ Nuevo Curso</div><div class="tile">+ Nueva Lección</div><div class="tile">Subir Media</div></div>
+        <div class="tiles"><div class="cnt"><b>—</b>Cursos</div><div class="cnt"><b>—</b>Lecciones</div><div class="cnt"><b>—</b>Alumnos</div></div>
+        <span class="tag t-pend">Usuarios y contadores: pendientes</span>
+      </div>
+    </div>
+    <div class="win" role="img" aria-label="Maqueta de la pantalla Subir Media con lista de lección, tipo de archivo, selector de archivo y barra de avance al 62 por ciento">
+      <div class="bar"><i></i><i></i><i></i><span>…/dashboard/admin/upload</span></div>
+      <div class="body">
+        <h4>Subir media</h4>
+        <div class="fld"><label>Lección</label><div>Reino del Ballet › 1. Primer plié</div></div>
+        <div class="fld"><label>Tipo de archivo</label><div>Video de referencia (.mp4)</div></div>
+        <div class="fld"><label>Archivo</label><div>plie-profesor.mp4</div></div>
+        <span class="btn">Subir</span>
+        <div class="prog"><i></i></div><small style="color:var(--muted)">Subiendo… 62 %</small>
+      </div>
+    </div>
+  </div>
+
+  <h3>Crear un curso (solo ADMIN)</h3>
+  <p>Ruta: <strong>Cursos → Nuevo Curso</strong>. Queda en <strong>Borrador</strong>.</p>
+  <div class="tw"><table>
+    <tr><th>Campo</th><th>Qué poner</th><th>Ejemplo</th></tr>
+    <tr><td>Título y Slug</td><td>Nombre visible; el slug debe ser único.</td><td>Ballet para empezar · <code>ballet-para-empezar</code></td></tr>
+    <tr><td>Nombre y tema del mundo</td><td>Reino en la app y palabra visual.</td><td>Reino del Ballet · sunrise</td></tr>
+    <tr><td>Nivel</td><td>1 Despierta tu cuerpo · 2 Mis pies cuentan historias · 3 Soy fuerte y flexible · 4 Danza con el aire · 5 El escenario es mi mundo</td><td>1</td></tr>
+    <tr><td>Categoría</td><td>Calentamiento, Ballet básico, Gimnasia, Expresión corporal, Ritmo y coordinación, Flexibilidad, Coreografía.</td><td>Ballet básico</td></tr>
+    <tr><td>Edad mínima / máxima, Orden</td><td>Rango recomendado y posición en la lista.</td><td>6 a 10 · 1</td></tr>
+  </table></div>
+
+  <h3>Crear una lección y subir sus archivos</h3>
+  <ol class="steps">
+    <li><strong>Lecciones → Nueva Lección</strong> (o <strong>+ Lección</strong> en la fila del curso). Completa curso, título, slug único, nivel, orden, duración en segundos, BPM (40 a 220) y puntos de recompensa.</li>
+    <li><strong>Panel → Subir Media</strong>: elige la lección, el tipo (<code>.mp4</code>, <code>.json</code> o JPEG), el archivo, y pulsa <strong>Subir</strong>. Al terminar, la lección queda vinculada sola.</li>
+    <li>En <strong>Cursos</strong> pulsa <strong>Publicar</strong>. Antes, revisa que el curso tenga al menos una lección con video y esqueleto.</li>
+  </ol>
+  <pre class="mermaid">sequenceDiagram
+  actor A as Administrador
+  participant W as Navegador
+  participant API as Servicio admin
+  participant S3 as S3 artevivax-media
+  A->>W: Elige lección, tipo y archivo
+  W->>API: Pide URL de subida
+  API-->>W: URL firmada (1 h) y clave
+  W->>S3: PUT directo del archivo
+  S3-->>W: 200 OK
+  W->>API: Guarda la clave en la lección
+  W-->>A: Subida completa</pre>
+
+  <div class="tw"><table>
+    <tr><th>Si la subida falla</th><th>Causa probable</th><th>Qué hacer</th></tr>
+    <tr><td>“Subido a S3 … pero no pude vincularlo”</td><td>El archivo llegó, falló el guardado en la lección.</td><td>Edita la lección y pega la clave S3 del mensaje.</td></tr>
+    <tr><td>Falla y la consola menciona CORS</td><td>Falta la regla CORS del bucket.</td><td>Restaurarla (ver Operación).</td></tr>
+    <tr><td>Te lleva al login</td><td>Sesión expirada.</td><td>Entrar y repetir.</td></tr>
+    <tr><td>Rechaza el archivo</td><td>Formato distinto al de la tabla.</td><td>Convertir a MP4, JSON o JPEG.</td></tr>
+  </table></div>
+  <div class="tw"><table>
+    <tr><th>Acción</th><th>ADMIN</th><th>TEACHER</th></tr>
+    <tr><td>Ver cursos y lecciones, crear lecciones, subir media</td><td>Sí</td><td>Sí</td></tr>
+    <tr><td>Crear, publicar o archivar cursos</td><td>Sí</td><td>No</td></tr>
+  </table></div>
+  <p>Aún no se puede: administrar usuarios, ver cifras reales en los contadores, ni borrar (solo archivar).</p>
+</section>
+
+<section id="familia">
+  <div class="eyebrow">Manual 2 · Web</div>
+  <h2>Padres, madres, acudientes y docentes</h2>
+  <div class="note bad"><strong>Estado actual.</strong> Funcionan el registro, el inicio de sesión y la portada del panel. Hijos, Consentimientos y Progreso tienen su lógica en el servidor pero <strong>sus pantallas no están construidas</strong>: esos enlaces llevan a una página sin contenido (404).</div>
+  <pre class="mermaid">flowchart TB
+  P[Padre / acudiente · web] -->|crea y autoriza| H[Perfil del hijo]
+  H -->|practica| E[Estudiante · app móvil]
+  E -->|sesiones y puntajes| R[Reportes]
+  R --> P
+  D[Docente · web] -->|resultados de su curso| R
+  A[Administrador] -->|carga cursos| C[Catálogo]
+  C --> E</pre>
+
+  <h3>Crear cuenta e ingresar</h3>
+  <ol class="steps">
+    <li>En <code>/app/register</code> completa nombre, apellido, correo y contraseña (mínimo 8, con mayúscula, minúscula, número y un símbolo de <code>@ $ ! % * ? &amp;</code>). En <strong>Soy…</strong> elige Padre/Madre/Tutor o Profesor/a.</li>
+    <li>La cuenta queda <strong>pendiente de verificación</strong>. El correo de verificación está desactivado, así que el equipo técnico debe activarla (ver Operación).</li>
+    <li>Con la cuenta activa, entra por <code>/app/login</code>. Para salir pulsa <strong>Salir</strong>.</li>
+  </ol>
+  <div class="mocks">
+    <div class="win" role="img" aria-label="Maqueta del Panel de Familia con tres tarjetas cuyas pantallas están pendientes">
+      <div class="bar"><i></i><i></i><i></i><span>artevivax.com/app/dashboard/parent</span></div>
+      <div class="menu"><b>ARTEVIVA</b><em>Inicio</em><em class="x">Consentimientos</em><em class="x">Progreso</em><em>Salir</em></div>
+      <div class="body">
+        <h4>Panel de Familia</h4>
+        <div class="pcard"><div>Tus Hijos<small>Crear y gestionar perfiles infantiles</small></div><span class="tag t-pend">Pendiente</span></div>
+        <div class="pcard"><div>Reportes Semanales<small>Progreso y métricas</small></div><span class="tag t-pend">Pendiente</span></div>
+        <div class="pcard"><div>Consentimientos COPPA<small>Datos y cámara</small></div><span class="tag t-pend">Pendiente</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Consentimientos y progreso (previstos)</h3>
+  <div class="tw"><table>
+    <tr><th>Permiso</th><th>Qué autoriza</th></tr>
+    <tr><td><code>DATA_PROCESSING</code></td><td>Guardar el progreso y los puntajes.</td></tr>
+    <tr><td><code>CAMERA_USE</code></td><td>Usar la cámara durante la práctica.</td></tr>
+    <tr><td><code>AI_ANALYSIS</code></td><td>Enviar imágenes de la práctica a la IA.</td></tr>
+    <tr><td><code>MARKETING</code></td><td>Recibir novedades (opcional).</td></tr>
+  </table></div>
+  <p>Se pueden revocar en cualquier momento y se puede pedir la eliminación de los datos. Los indicadores que se calculan por estudiante son: sesiones totales, puntuación promedio, racha actual y lecciones completadas; hoy solo los ve el estudiante en su app.</p>
+</section>
+
+<section id="estudiante">
+  <div class="eyebrow">Manual 3 · App móvil</div>
+  <h2>Estudiante: practicar con la cámara</h2>
+  <p>Abres una práctica, apoyas el celular frente a ti y bailas. Cada dos segundos la app envía una imagen a la IA, que compara tu postura con la del profesor y te muestra puntaje, carita de ánimo y una sugerencia.</p>
+  <pre class="mermaid">flowchart LR
+  Cam[Cámara] -->|imagen cada 2 s| API[ARTEVIVA]
+  API --> Pose[Detecta postura]
+  API --> Emo[Detecta ánimo]
+  Pose --> Cmp[Compara con el profesor]
+  Cmp --> Out[Puntaje + sugerencia]
+  Emo --> Out
+  Out --> Pantalla[Tu pantalla]</pre>
+
+  <h3>Instalar</h3>
+  <p><strong>Android:</strong> abre <code>arteviva.apk</code>, permite instalar desde esa fuente si Android lo pide, pulsa Instalar y Abrir. <strong>iPhone:</strong> aún no disponible (requiere cuenta Apple Developer de pago).</p>
+
+  <h3>Las pantallas</h3>
+  <div class="phones">
+    <div class="phone" role="img" aria-label="Pantalla de inicio de sesión con campos de email y contraseña"><div class="notch"></div><div class="scr" style="justify-content:center">
+      <h5>ARTEVIVA</h5><div class="sub">El Reino del Movimiento</div>
+      <div class="fld" style="margin:8px 0 0"><label>Email</label><div>estudiante@…</div></div>
+      <div class="fld"><label>Contraseña</label><div>••••••••</div></div>
+      <span class="btn" style="text-align:center">Ingresar</span>
+      <div class="sub">“Credenciales incorrectas” si hay error</div></div></div>
+    <div class="phone" role="img" aria-label="Pantalla de inicio con cinco mundos de danza, dos disponibles y tres bloqueados"><div class="notch"></div><div class="scr">
+      <h5>El Reino del Movimiento</h5><div class="sub">Elige tu mundo de danza</div>
+      <div class="world">Reino del Ballet <span>›</span></div><div class="world">Ciudad Hip-Hop <span>›</span></div>
+      <div class="world lock">Bosque Contemporáneo <span>🔒</span></div><div class="world lock">Metrópolis Jazz <span>🔒</span></div><div class="world lock">Caribe Latino <span>🔒</span></div></div>
+      <div class="tabs"><span class="on">Inicio</span><span>Practicar</span><span>Progreso</span></div></div>
+    <div class="phone" role="img" aria-label="Pantalla de práctica con vista de cámara, puntaje 82 por ciento, carita y sugerencia"><div class="notch"></div><div class="scr">
+      <div class="cam"><span class="score">82%</span><span class="face">🙂</span>
+        <svg class="stick" viewBox="0 0 44 96"><circle cx="22" cy="10" r="7"/><path d="M22 18V56M22 28L6 44M22 28L38 40M22 56L10 90M22 56L34 90"/></svg>
+        <span class="tip">Estira más el brazo derecho</span></div>
+      <span class="btn" style="text-align:center;background:var(--bad);color:#fff">■ Terminar</span></div>
+      <div class="tabs"><span>Inicio</span><span class="on">Practicar</span><span>Progreso</span></div></div>
+    <div class="phone" role="img" aria-label="Pantalla Mi Progreso con cuatro tarjetas de métricas"><div class="notch"></div><div class="scr">
+      <h5>Mi Progreso</h5>
+      <div class="kpg"><div class="kp"><b>12</b><span>Sesiones totales</span></div><div class="kp"><b>78%</b><span>Puntuación promedio</span></div><div class="kp"><b>4</b><span>Racha actual</span></div><div class="kp"><b>3</b><span>Lecciones completadas</span></div></div>
+      <div class="sub">Cifras de ejemplo</div></div>
+      <div class="tabs"><span>Inicio</span><span>Practicar</span><span class="on">Progreso</span></div></div>
+  </div>
+
+  <ol class="steps">
+    <li>En <strong>Practicar</strong> concede el <strong>Permiso de Cámara</strong>. Sin él no se puede practicar.</li>
+    <li>Apoya el celular para verte de cuerpo completo, con buena luz de frente y fondo despejado.</li>
+    <li>Pulsa <strong>▶ Iniciar Práctica</strong>, baila y mira tu puntaje y sugerencia. Si no hay nada que corregir verás “¡Excelente! Sigue así”. Termina con <strong>■ Terminar</strong>.</li>
+  </ol>
+  <div class="tw"><table>
+    <tr><th>Problema</th><th>Qué hacer</th></tr>
+    <tr><td>“Credenciales incorrectas”</td><td>Revisa correo y contraseña; pide ayuda a tu familia.</td></tr>
+    <tr><td>La cámara no abre</td><td>En los ajustes del celular, permite la cámara para ARTEVIVA.</td></tr>
+    <tr><td>El puntaje no cambia</td><td>Revisa conexión a internet y la luz.</td></tr>
+    <tr><td>“No se pudo cargar el progreso”</td><td>Revisa la conexión; si persiste, vuelve a entrar.</td></tr>
+  </table></div>
+  <div class="note">Menores de edad: practicar con un adulto cerca. La cámara se usa solo durante la práctica y la familia puede revocar el permiso.</div>
+</section>
+
+<section id="streaming">
+  <div class="eyebrow">Manual 4 · ARTEVIVAX</div>
+  <h2>Streaming de clases</h2>
+  <p>Catálogo de clases de danza y arte por suscripción en <code>https://www.artevivax.com/streaming/</code>. Es otro producto con otro acceso: no usa el login de ARTEVIVA.</p>
+  <div class="note"><strong>Alcance de este manual.</strong> Se escribió observando la aplicación sin iniciar sesión. Login, pago, reproducción y administración del catálogo están marcados <span class="tag t-conf">Confirmar</span> y deben completarse con quien administra esa aplicación.</div>
+  <pre class="mermaid">flowchart TB
+  S[Portada animada · Entrar] --> H[Inicio]
+  H --> Cat[Categorías]
+  H --> Pl[Planes]
+  H --> Login[Iniciar sesión]
+  H --> Hero[ARTEVIVAX Originals]
+  H --> Rows[Filas por categoría]
+  Pl --> Sub[Suscribirme]
+  Login --> Play[Reproducción]
+  Sub --> Play</pre>
+  <div class="mocks">
+    <div class="sdark" role="img" aria-label="Maqueta de la pantalla de inicio del streaming con destacado Ballet y filas de catálogo con candados">
+      <div class="nav"><b>ARTEVIVAX</b><span>Inicio</span><span>Categorías</span><span>Planes</span><span class="g">Iniciar sesión</span></div>
+      <div class="hero2"><small>ARTEVIVAX ORIGINALS</small><h4>Ballet</h4><span class="b p">▶ Reproducir</span><span class="b">Más información</span><span class="b">Catálogo</span></div>
+      <div class="row"><p>Contemporáneo · Explorar todo</p><div class="cards"><i>🎭</i><i>🎭</i><i>🎭</i><i>🎭</i><i>🎭</i></div></div>
+      <div class="row"><p>Gimnasia · Explorar todo</p><div class="cards"><i>🎭</i><i>🎭</i><i>🎭</i><i>🎭</i><i>🎭</i></div></div>
+    </div>
+    <div class="sdark" role="img" aria-label="Maqueta de la pantalla de planes con Básico, Estándar y Premium">
+      <div class="nav"><b>ARTEVIVAX</b><span>Elige tu plan</span></div>
+      <div class="plans">
+        <div class="plan"><h6>Básico</h6><div class="pr">USD 9,99</div>HD · 1 pantalla<br>Sin anuncios</div>
+        <div class="plan hot"><h6>Estándar</h6><div class="pr">USD 14,99</div>Full HD · 2 pantallas<br>Más popular</div>
+        <div class="plan"><h6>Premium</h6><div class="pr">USD 19,99</div>4K · 4 pantallas<br>Descargas</div>
+      </div>
+    </div>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Categoría</th><th>Subtipos</th></tr>
+    <tr><td>Contemporáneo · Preparación Física · Ballet · Secuencias o Transiciones</td><td>—</td></tr>
+    <tr><td>Gimnasia</td><td>Gimnasia Artística, Gimnasia Rítmica</td></tr>
+    <tr><td>Géneros</td><td>Merengue, Salsa</td></tr>
+  </table></div>
+  <p>Cada tarjeta de clase muestra ▶ (reproducir), + (agregar a tu lista) y un candado si requiere cuenta o plan. Hoy las tarjetas muestran un icono porque el catálogo tiene contenido de ejemplo, sin miniaturas.</p>
+  <div class="tw"><table>
+    <tr><th>Por confirmar con el responsable</th><th>Estado</th></tr>
+    <tr><td>Crear cuenta, iniciar sesión, recuperar contraseña</td><td><span class="tag t-conf">Confirmar</span></td></tr>
+    <tr><td>Pasarela de pago, medios, facturación y cancelación</td><td><span class="tag t-conf">Confirmar</span></td></tr>
+    <tr><td>Reproductor: calidad, pantalla completa, subtítulos, lista personal</td><td><span class="tag t-conf">Confirmar</span></td></tr>
+    <tr><td>Cómo agregar una clase, dónde viven los videos, cambiar precios, destacar contenido</td><td><span class="tag t-conf">Confirmar</span></td></tr>
+  </table></div>
+</section>
+
+<section id="operacion">
+  <div class="eyebrow">Manual 5 · Equipo técnico</div>
+  <h2>Operación diaria</h2>
+  <div class="tw"><table>
+    <tr><th>Dato</th><th>Valor</th></tr>
+    <tr><td>Servidor</td><td>EC2 <code>ip-172-31-33-17</code>, x86_64, Ubuntu · IP <code>54.162.68.97</code> (confirmar Elastic IP)</td></tr>
+    <tr><td>Contenedores</td><td>Podman rootless + <code>podman-compose</code>, ~25, archivo <code>docker-compose.prod.yml</code></td></tr>
+    <tr><td>Secretos</td><td><code>~/secrets/services/&lt;servicio&gt;.env.prod</code> (fuera del repo; sin copia externa)</td></tr>
+    <tr><td>nginx del host</td><td><code>/streaming/</code> → 4000 · <code>/app/</code> → 8080. Copia en <code>deploy/nginx-artevivax-domain.conf</code></td></tr>
+    <tr><td>Sesión</td><td>JWT de 15 min (HS256, mismo <code>JWT_SECRET</code>). Roles: SUPER_ADMIN, ADMIN, TEACHER, PARENT, STUDENT</td></tr>
+  </table></div>
+
+  <div class="cap">Comprobar que todo vive (web = 200, login falso = 401)</div>
+  <div class="code"><button type="button">Copiar</button><pre>podman ps --format '{{.Names}}\t{{.Status}}'
+curl -s -o /dev/null -w '%{http_code}\n' https://www.artevivax.com/app/
+curl -s -o /dev/null -w '%{http_code}\n' -X POST https://www.artevivax.com/app/api/auth/login -H 'Content-Type: application/json' -d '{"email":"x@x.com","password":"x"}'</pre></div>
+
+  <div class="cap">502 o login con error 500 sin logs: reiniciar el gateway (no usar <code>podman restart</code> con los de la app)</div>
+  <div class="code"><button type="button">Copiar</button><pre>podman stop arteviva-nginx; podman start arteviva-nginx</pre></div>
+
+  <div class="cap">Logs de un servicio</div>
+  <div class="code"><button type="button">Copiar</button><pre>podman logs --tail 100 arteviva-identity
+podman logs --tail 100 arteviva-admin</pre></div>
+
+  <div class="cap">Entrar a la base de identidad</div>
+  <div class="code"><button type="button">Copiar</button><pre>PG=$(podman ps --format '{{.Names}}' | grep -i -E 'pg|postgres' | grep -i identity | head -1)
+podman exec -it $PG sh -c 'psql -U "$POSTGRES_USER" -d identity_db'</pre></div>
+
+  <div class="cap">Activar una cuenta registrada (SQL)</div>
+  <div class="code"><button type="button">Copiar</button><pre>UPDATE users SET status='ACTIVE', email_verified_at=NOW() WHERE email='correo@dominio.com';</pre></div>
+
+  <div class="cap">Cambiar rol (SQL)</div>
+  <div class="code"><button type="button">Copiar</button><pre>UPDATE users SET role='ADMIN' WHERE email='correo@dominio.com';</pre></div>
+
+  <div class="cap">Crear un estudiante (el registro público no lo permite)</div>
+  <div class="code"><button type="button">Copiar</button><pre>H=$(podman exec arteviva-identity node -e "console.log(require('bcryptjs').hashSync(process.argv[1],12))" 'LaContraseñaNueva1@')
+podman exec -i $PG sh -c 'psql -U "$POSTGRES_USER" -d identity_db' &lt;&lt;SQL
+INSERT INTO users (email,password_hash,first_name,last_name,role,status,email_verified_at)
+VALUES ('estudiante@dominio.com','$H','Nombre','Apellido','STUDENT','ACTIVE',NOW());
+SQL</pre></div>
+
+  <div class="cap">CORS del bucket (S3 → Permissions → CORS; es independiente de la bucket policy)</div>
+  <div class="code"><button type="button">Copiar</button><pre>[
+  {
+    "AllowedOrigins": ["https://www.artevivax.com"],
+    "AllowedMethods": ["PUT", "GET", "HEAD"],
+    "AllowedHeaders": ["*"],
+    "ExposeHeaders": ["ETag"],
+    "MaxAgeSeconds": 3000
+  }
+]</pre></div>
+
+  <div class="cap">Compilar el APK (desde una copia fuera del monorepo)</div>
+  <div class="code"><button type="button">Copiar</button><pre>cp -R apps/mobile ~/arteviva-mobile &amp;&amp; cd ~/arteviva-mobile
+npm install
+npx expo install expo-constants expo-linking expo-status-bar react-native react-native-safe-area-context react-native-screens
+npm install -g eas-cli &amp;&amp; eas login &amp;&amp; eas init
+EAS_NO_VCS=1 eas build -p android --profile preview</pre></div>
+  <p>El segundo comando fija las versiones del SDK 51; sin él Gradle falla con <code>expo-module-gradle-plugin was not found</code>. Al terminar, copia <code>package.json</code>, <code>package-lock.json</code> y <code>app.json</code> de vuelta a <code>apps/mobile</code>.</p>
+
+  <h3>Problemas conocidos</h3>
+  <div class="tw"><table>
+    <tr><th>Síntoma</th><th>Causa</th><th>Solución</th></tr>
+    <tr><td>502 en <code>/app</code> tras desplegar</td><td>El gateway guardó IPs viejas.</td><td>Reiniciar <code>arteviva-nginx</code>.</td></tr>
+    <tr><td><code>Unknown authentication strategy "jwt"</code></td><td>El servicio no registra <code>JwtStrategy</code>.</td><td>Registrarla en su módulo.</td></tr>
+    <tr><td>401 al poco de entrar</td><td>Token de 15 min vencido.</td><td>Volver a iniciar sesión.</td></tr>
+    <tr><td><code>Body cannot be empty</code> al publicar</td><td>PATCH sin cuerpo.</td><td>Enviar <code>{}</code>.</td></tr>
+    <tr><td>Bucle con <code>ECONNREFUSED 127.0.0.1:5432</code></td><td>Falta la variable <code>*_DB_URL</code>.</td><td>Definirla en el compose.</td></tr>
+    <tr><td><code>JWT_SECRET is required</code></td><td>Falta en el <code>.env.prod</code>.</td><td>Copiar el secreto común.</td></tr>
+  </table></div>
+</section>
+
+<section id="entrega">
+  <div class="eyebrow">Manual 6 · Cierre</div>
+  <h2>Entrega y aceptación</h2>
+  <p>Marca cada prueba cuando la hayas ejecutado en producción. Tu avance se guarda en este navegador.</p>
+
+  <div class="meter" aria-live="polite"><div class="bar"><i id="mbar"></i></div><strong id="mtxt">0 de 20</strong><button type="button" id="mreset">Reiniciar</button></div>
+  <div class="chk" id="chk"></div>
+
+  <h3>Alcance pendiente declarado</h3>
+  <p>Debe quedar acordado antes de firmar.</p>
+  <div class="tw"><table>
+    <tr><th>Pendiente</th><th>Efecto hoy</th></tr>
+    <tr><td>Verificación de correo (SendGrid + endpoint)</td><td>Quien se registra no entra hasta que el equipo técnico active su cuenta.</td></tr>
+    <tr><td>Pantallas de familia: Hijos, Consentimientos, Progreso</td><td>Los enlaces llevan a una página inexistente; no se crean perfiles de hijos desde la web.</td></tr>
+    <tr><td>Página Usuarios y contadores del panel</td><td>Enlace roto y cifras en “—”.</td></tr>
+    <tr><td>Página del estudiante en la web (<code>/play</code>)</td><td>El estudiante solo usa la app móvil.</td></tr>
+    <tr><td>Mundos Contemporáneo, Jazz y Latino; práctica con lección real</td><td>Bloqueados; la práctica usa una sesión de demostración.</td></tr>
+    <tr><td>Llaves reales de voz y notificaciones push</td><td>Marcadas <code>DESACTIVADO</code>.</td></tr>
+    <tr><td>App para iPhone</td><td>Requiere Apple Developer de pago.</td></tr>
+    <tr><td>Copias de seguridad automáticas de las bases de datos</td><td>No existen.</td></tr>
+    <tr><td>Streaming: catálogo con videos y miniaturas reales</td><td>Muestra contenido de ejemplo.</td></tr>
+  </table></div>
+
+  <h3>Accesos que se transfieren</h3>
+  <p>No escribas contraseñas aquí; entrégalas por un canal seguro.</p>
+  <div class="tw"><table>
+    <tr><th>Acceso</th><th>Responsable actual</th><th>Entregado a</th><th>Fecha</th></tr>
+    <tr><td>Cuenta AWS (EC2, S3, IAM)</td><td>____</td><td>____</td><td>____</td></tr>
+    <tr><td>Repositorios de GitHub y runner</td><td>____</td><td>____</td><td>____</td></tr>
+    <tr><td>Dominio <code>artevivax.com</code> (DNS)</td><td>____</td><td>____</td><td>____</td></tr>
+    <tr><td>Usuario <code>ADMIN</code> de la plataforma</td><td>____</td><td>____</td><td>____</td></tr>
+    <tr><td>Cuenta de Expo (compilación de la app)</td><td>____</td><td>____</td><td>____</td></tr>
+    <tr><td>Administración del streaming</td><td>____</td><td>____</td><td>____</td></tr>
+  </table></div>
+
+  <h3>Seguridad antes de entregar</h3>
+  <ol class="steps">
+    <li>Revocar todos los tokens de GitHub creados durante el montaje y cualquier credencial que haya circulado en chats o correos.</li>
+    <li>Cambiar las contraseñas de las cuentas de prueba (administrador y estudiante).</li>
+    <li>Guardar una copia cifrada de <code>~/secrets</code> fuera del servidor.</li>
+    <li>Asignar una Elastic IP, programar <code>pg_dump</code> hacia S3 y apagar la instancia ARM anterior tras 2 o 3 días estables.</li>
+  </ol>
+
+  <footer>Los manuales completos en Markdown están en <code>docs/manuales/</code> del repositorio <code>joseph-danza-platform</code>. Nota: <code>docs/manual-usuario.md</code> es anterior y describe funciones previstas, no el estado real; prevalece esta documentación.</footer>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  // copiar
+  document.querySelectorAll('.code').forEach(function(box){
+    var b=box.querySelector('button'),pre=box.querySelector('pre');
+    b.addEventListener('click',function(){
+      var done=function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1400)};
+      var fallback=function(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecciona y copia';setTimeout(function(){b.textContent='Copiar'},2000)};
+      try{navigator.clipboard.writeText(pre.textContent).then(done,fallback)}catch(e){fallback()}
+    });
+  });
+  // checklist
+  var items=[
+   ['Plataforma web','Abrir /app/ → portada con botones de entrar y registrarse'],
+   ['Plataforma web','Iniciar sesión como ADMIN → llega a “Panel de Administración”'],
+   ['Plataforma web','Crear un curso → aparece en Cursos como Borrador'],
+   ['Plataforma web','Crear una lección en ese curso → aparece agrupada por curso'],
+   ['Plataforma web','Subir una miniatura JPEG desde Subir Media → llega al 100 % sin error'],
+   ['Plataforma web','Publicar el curso → estado Publicado'],
+   ['Plataforma web','Catálogo (/app/api/content/courses, con sesión) → aparece el curso publicado'],
+   ['Plataforma web','Cerrar sesión → vuelve al login'],
+   ['Plataforma web','Iniciar sesión como PARENT → llega al “Panel de Familia”'],
+   ['App móvil','Instalar el APK en un Android → la app abre'],
+   ['App móvil','Iniciar sesión con la cuenta de estudiante → “El Reino del Movimiento”'],
+   ['App móvil','Abrir Reino del Ballet y permitir la cámara → aparece la cámara'],
+   ['App móvil','Iniciar práctica → puntaje y sugerencia (requiere IA activa)'],
+   ['App móvil','Abrir Progreso → cuatro tarjetas o mensaje de primera sesión'],
+   ['Streaming','Abrir /streaming/ y pulsar Entrar → inicio con destacado y filas'],
+   ['Streaming','Abrir Planes → tres planes con sus precios'],
+   ['Streaming','Iniciar sesión, suscribirse y reproducir → [Confirmar con el responsable]'],
+   ['Infraestructura','git push a trunk con un cambio menor → despliegue en verde sin reiniciar nada a mano'],
+   ['Infraestructura','podman ps en el servidor → todos los contenedores Up'],
+   ['Infraestructura','Preflight CORS del bucket → 200 con Access-Control-Allow-Origin']
+  ];
+  var KEY='arteviva-docs-checklist',state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){state={}}
+  var root=document.getElementById('chk'),last='';
+  items.forEach(function(it,i){
+    if(it[0]!==last){last=it[0];var h=document.createElement('h3');h.textContent=last;root.appendChild(h)}
+    var l=document.createElement('label'),c=document.createElement('input'),s=document.createElement('span');
+    c.type='checkbox';c.checked=!!state[i];s.textContent=(i+1)+'. '+it[1];
+    c.addEventListener('change',function(){state[i]=c.checked;save();upd()});
+    l.appendChild(c);l.appendChild(s);root.appendChild(l);
+  });
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  function upd(){var n=root.querySelectorAll('input:checked').length;document.getElementById('mtxt').textContent=n+' de '+items.length;document.getElementById('mbar').style.width=(n/items.length*100)+'%'}
+  document.getElementById('mreset').addEventListener('click',function(){state={};save();root.querySelectorAll('input').forEach(function(x){x.checked=false});upd()});
+  upd();
+  // scroll-spy
+  var links={};document.querySelectorAll('#nav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){Object.keys(links).forEach(function(k){links[k].classList.remove('on')});var a=links[e.target.id];if(a){a.classList.add('on');if(window.innerWidth<=860){a.scrollIntoView({inline:'center',block:'nearest'})}}}})},{rootMargin:'-20% 0px -70% 0px'});
+    document.querySelectorAll('main section').forEach(function(s){io.observe(s)});
+  }
+})();
+</script>
+
+<!--claude-mermaid-runtime-begin:3477-->
+<style>.mermaid-diagram{margin-block:4px}.mermaid-diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}</style>
+<script src="/_runtime/mermaid-11.16.1.min.js"></script>
+<script>(function(){
+var CFG={"palettes":{"light":{"surface":"#f4efe4","text":"#42392e","line":"#8a7f6d","border":"#7a6c52","bg":"#fffdf8"},"dark":{"surface":"#262b34","text":"#f2f3f5","line":"#a8adb8","border":"#9aa4b8","bg":"#1f232b"}}};
+if(typeof mermaid==='undefined')return;
+var pres=Array.prototype.slice.call(document.querySelectorAll('pre.mermaid')).filter(function(p){if(p.hasAttribute('data-claude-mermaid-claimed'))return false;p.setAttribute('data-claude-mermaid-claimed','1');return true;});
+if(!pres.length)return;
+var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+var root=document.documentElement;
+var items=pres.map(function(pre){
+var mount=document.createElement('div');mount.className='mermaid-diagram';
+return {pre:pre,mount:mount,src:pre.textContent||''};
+});
+var seq=0;
+var renderGen=0;
+var lastKey='';
+function pageBg(fallback){
+var els=[document.body,document.documentElement];
+for(var i=0;i<els.length;i++){
+var c=els[i]&&getComputedStyle(els[i]).backgroundColor;
+if(c&&c!=='transparent'&&c!=='rgba(0, 0, 0, 0)')return c;
+}
+return fallback;
+}
+function render(){
+var theme=root.getAttribute('data-theme');
+var dark=theme==='dark'||(!!(mq&&mq.matches)&&theme!=='light');
+var pal=dark?CFG.palettes.dark:CFG.palettes.light;
+var bg=pageBg(pal.bg);
+var key=(dark?'d':'l')+'|'+bg;
+if(key===lastKey)return;
+lastKey=key;
+var gen=++renderGen;
+var font=getComputedStyle(document.body).fontFamily||'sans-serif';
+var nat={useMaxWidth:false};
+mermaid.initialize({
+startOnLoad:false,securityLevel:'strict',theme:'base',
+flowchart:nat,sequence:nat,er:nat,state:nat,class:nat,pie:nat,
+gantt:nat,journey:nat,timeline:nat,gitGraph:nat,mindmap:nat,xyChart:nat,
+quadrantChart:nat,sankey:nat,c4:nat,requirement:nat,block:nat,
+packet:nat,kanban:nat,architecture:nat,radar:nat,
+themeVariables:{background:bg,mainBkg:pal.surface,primaryColor:pal.surface,
+primaryTextColor:pal.text,lineColor:pal.line,primaryBorderColor:pal.border,
+nodeBorder:pal.border,clusterBorder:pal.border,edgeLabelBackground:bg,
+clusterBkg:'rgba(127,127,127,0.07)',titleColor:pal.text,
+darkMode:dark,rowOdd:bg,rowEven:'rgba(127,127,127,0.07)',
+attributeBackgroundColorOdd:bg,attributeBackgroundColorEven:'rgba(127,127,127,0.07)',
+fontSize:'16px',fontFamily:font},
+themeCSS:'.node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }'
+});
+items.forEach(function(it){
+var id='claude-mermaid-'+seq++;
+mermaid.render(id,it.src).then(function(r){
+if(gen!==renderGen)return;
+var prev=it.pre.previousElementSibling;
+if(prev&&prev.className==='mermaid-diagram'&&prev!==it.mount)return;
+it.mount.innerHTML=r.svg;
+if(!it.mount.parentNode)it.pre.parentNode.insertBefore(it.mount,it.pre);
+it.pre.style.display='none';
+},function(){
+var scratch=document.getElementById(id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+scratch=document.getElementById('d'+id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+if(gen!==renderGen)return;
+if(it.mount.parentNode)it.mount.parentNode.removeChild(it.mount);
+it.pre.style.display='';
+});
+});
+}
+render();
+if(mq&&mq.addEventListener)mq.addEventListener('change',render);
+if(typeof MutationObserver!=='undefined')new MutationObserver(render).observe(root,{attributes:true,attributeFilter:['data-theme']});
+})();</script>
+<!--claude-mermaid-runtime-end-->
+
+</body></html>
